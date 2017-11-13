@@ -23,7 +23,7 @@ class RecreationFinder::CLI
     }
     print "Which recreation facility would you like more information about? "
     index = gets.strip.to_i
-    detail = RecFinder::Rec.all[index-1]
+    detail = RecreationFinder::Rec.all[index-1]
     if detail.description == nil
       detail.add_detail(RecreationFinder::Scraper.scrape_detail(BASE_URL+detail.url))
     end

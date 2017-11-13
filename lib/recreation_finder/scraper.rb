@@ -1,4 +1,4 @@
-class RecFinder::Scraper
+class RecreationFinder::Scraper
   def self.get_page(index)
     Nokogiri::HTML(open(index))
   end
