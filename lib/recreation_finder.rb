@@ -1,4 +1,5 @@
 require "recreation_finder/version"
+require "recreation_finder/cli"
 
 module RecreationFinder
   def self.hello 
