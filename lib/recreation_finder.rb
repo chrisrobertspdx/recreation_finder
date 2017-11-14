@@ -8,7 +8,5 @@ require "recreation_finder/facility"
 require "recreation_finder/scraper"
 
 module RecreationFinder
-  def self.hello 
-  	puts "I will help you find a cool place to recreate"
-  end
+
 end

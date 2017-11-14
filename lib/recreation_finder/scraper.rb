@@ -6,15 +6,16 @@ class RecreationFinder::Scraper
     Nokogiri::HTML(open(url))
   end
   def self.scrape_index(index)
-    parks = []
+    facilities = []
     html_block = self.get_page(index).css("tr.maplink")
-    html_block.each {|p|
-      parks << {
-      :url => p.css("a.linkurl")[0].attribute("href").value,
-      :name => p.css("a.linkurl")[0].text
+    html_block.each {|f|
+      facilities << {
+      :url => f.css("a.linkurl")[0].attribute("href").value,
+      :type => f.css("a.linkurl")[0].attribute("href").value.split("/")[2],
+      :name => f.css("a.linkurl")[0].text
       }
     }
-    parks
+    facilities
   end
   def self.scrape_detail(url)
     detail = self.get_detail(url)

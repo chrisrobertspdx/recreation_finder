@@ -1,5 +1,5 @@
 class RecreationFinder::Facility
-  attr_accessor :name, :url, :phone, :address, :description, :alert
+  attr_accessor :name, :url, :phone, :address, :description, :alert, :type
   @@all = []
   def initialize(rec_data)
     rec_data.each {|key, value| self.send(("#{key}="), value)}
@@ -12,7 +12,7 @@ class RecreationFinder::Facility
   end
   def add_detail(detail_data)
     detail_data.each {|key, value| self.send(("#{key}="), value)}
-    self.details_updated = true
+    #self.details_updated = true
   end
   def self.all
     @@all

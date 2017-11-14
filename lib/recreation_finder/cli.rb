@@ -10,7 +10,13 @@ class RecreationFinder::CLI
   end
   
   def menu
-  	
+  	puts "Select facility type:"
+    puts "    Aquatic (A)"
+    puts "    Historic (H)"
+    puts "    Nature (N)"
+    puts "    Recreation (R)"
+    puts "    Senior (S)"
+
   end
   
   def make_recs
@@ -19,24 +25,26 @@ class RecreationFinder::CLI
   
   def display_recs
     RecreationFinder::Facility.all.each_with_index{|r,index|
-      puts "#{index+1}. #{r.name}"
+      puts "#{index+1}. #{r.name} #{r.type.upcase}"
     }
     print "Which recreation facility would you like more information about? "
     index = gets.strip.to_i
-    detail = RecreationFinder::Rec.all[index-1]
+    detail = RecreationFinder::Facility.all[index-1]
     if detail.description == nil
       detail.add_detail(RecreationFinder::Scraper.scrape_detail(BASE_URL+detail.url))
     end
     puts ""
     puts detail.name.upcase
+    if detail.alert != nil
+      puts "*****" + detail.alert + "*****"
+      puts
+    end
     puts "-----------------------"
     puts detail.phone
     puts detail.address
     puts "-----------------------"
-    if detail.alert != nil
-      puts detail.alert
-      puts
-    end
+    
+    puts detail.type.upcase
     puts detail.description
   end
 end
