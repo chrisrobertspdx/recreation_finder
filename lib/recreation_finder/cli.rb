@@ -24,14 +24,13 @@ class RecreationFinder::CLI
   end
   
   def display_recs
-    RecreationFinder::Facility.all.each_with_index{|r,index|
-      puts "#{index+1}. #{r.name} #{r.type.upcase}"
-    }
+    RecreationFinder::Facility.display_list
+    #binding.pry
     print "Which recreation facility would you like more information about? "
     index = gets.strip.to_i
     detail = RecreationFinder::Facility.all[index-1]
     if detail.description == nil
-      detail.add_detail(RecreationFinder::Scraper.scrape_detail(BASE_URL+detail.url))
+      detail.add_detail(RecreationFinder::Scraper.scrape_detail_xpath(BASE_URL+detail.url))
     end
     puts ""
     puts detail.name.upcase

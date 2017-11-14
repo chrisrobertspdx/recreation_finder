@@ -5,6 +5,7 @@ class RecreationFinder::Scraper
   def self.get_detail(url)
     Nokogiri::HTML(open(url))
   end
+
   def self.scrape_index(index)
     facilities = []
     html_block = self.get_page(index).css("tr.maplink")
@@ -29,6 +30,13 @@ class RecreationFinder::Scraper
       data[:alert] = detail.css("div.alert_banner").text.split.join(" ")
     end
     data
+  end
+  def self.scrape_detail_xpath(url)
+    detail = self.get_detail(url)
+    data = {
+      :phone => detail.xpath("/html/body/div[3]/div[2]/div[1]/div[2]").text.split.join(" ")
+    }
+    
   end
 end
 

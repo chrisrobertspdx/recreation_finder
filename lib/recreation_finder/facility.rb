@@ -18,6 +18,16 @@ class RecreationFinder::Facility
     @@all
   end
 
+  def self.display_list(category=nil)
+    self.all.each_with_index{|r,index|
+      puts "#{index+1}. #{r.name} #{r.type.upcase}"
+    }
+  end
+
+  def self.get_facility_by_name(name)
+    @@all.find {|f| f.name == name}
+  end
+
   def self.sayhello
     puts "hello"
   end
